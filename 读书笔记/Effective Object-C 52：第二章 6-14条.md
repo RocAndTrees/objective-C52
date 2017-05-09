@@ -33,7 +33,7 @@ NSString* lastName = [aPerson lastName];
 > 
 > @synthesize ：去除生成变量名的下划线。
 > 
-> @dynamic 阻止自动合成方法创建
+> @dynamic 阻止自动合成方法创建  
 
 ##### 属性特质
 > 原子性（atomic）：某操作具有整体性，系统其他部分无法观察到其中间的操作步骤，只能看到操作前和操作结果。 其他命名：（获取器，设置器，保有）。
@@ -144,14 +144,52 @@ sendMsg 操作流程：
 #### 12. 理解消息转发机制
 
 * 消息转发机制触发：对象无法响应某个选择子
+* 1.动态方法解析 -> 2.转交给其他对象解析 -> 3.完整的消息转发机制  [3个步骤 其中一个步骤完成就不会启动下一个步骤]
 
 
+消息转发流程：
+ 
+![MacDown logo](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/消息转发全流程.png)
 
-1.无缝桥接（toll-free bridging）
+
+<!--1.无缝桥接（toll-free bridging）-->
 
 
 
 #### 13. 用“方法调试技术” 调试 “黑盒方法”
 
+* 运行期，可以向类中新增或者替换选择子所对应的方法实现
+* 通关 “方法调试”向原有实现中添加新的功能。
+* 一般调试的时候使用，不宜滥用。
+
+
+>方法调配（method swizzling）：object-c 对象受到消息后，只有在运行期才能解析。利用这一特性覆写SEL-IMP 关系，就能改变这个类的本身的功能。
+
+动态消息派发系统 根据 ：类的方法列表会把选择子的名称映射到相关的实现上。
+
+IMP： 函数方法指针。  `id (* IMP)(id, SEL, ...)`
+
+类的选择子映射表 图1:
+
+开发者几个开发方向：1. 新增选择子 2. 改变选择子所对应的方法实现 3. 交换两个选择子所映射到的指针。
+
+改变后映射表 图2:
+
+```
+交换方法：Void method_exchangeImplementations(Method m1, Method m2)
+获取相关的方法： Mehod class_getInstanceMethod(Class aClass, SEL aSelector)
+
+Method originalMethod = class_getInstanceMethod([NSString class], @selector(lowercaseString));
+Method swappedMethod = class_getInstanceMethod([NSString class], @selector(uppercaseString));
+method_exchangeImplementations(originalMethod, swappedMethod);
+```
+
+调试方案： 
+1. 添加一个分类（category） 一个新方法
+2. 与现有的方法互换
+3. 可以实现日志、 适用于短时间现有版本方法更改问题。
+
 
 #### 14. 理解“类对象”的用意
+
+
