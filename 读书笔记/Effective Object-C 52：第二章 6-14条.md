@@ -149,7 +149,7 @@ sendMsg 操作流程：
 
 消息转发流程：
  
-![MacDown logo](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/消息转发全流程.png)
+![MacDown logo](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/12-1消息转发全流程.png)
 
 
 <!--1.无缝桥接（toll-free bridging）-->
@@ -171,9 +171,14 @@ IMP： 函数方法指针。  `id (* IMP)(id, SEL, ...)`
 
 类的选择子映射表 图1:
 
+![MacDown logo](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/13-1NSString类的选择子映射表.png)
+
+
 开发者几个开发方向：1. 新增选择子 2. 改变选择子所对应的方法实现 3. 交换两个选择子所映射到的指针。
 
 改变后映射表 图2:
+![MacDown logo](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/13-2操作后的映射表.png)
+
 
 ```
 交换方法：Void method_exchangeImplementations(Method m1, Method m2)
@@ -185,6 +190,7 @@ method_exchangeImplementations(originalMethod, swappedMethod);
 ```
 
 调试方案： 
+
 1. 添加一个分类（category） 一个新方法
 2. 与现有的方法互换
 3. 可以实现日志、 适用于短时间现有版本方法更改问题。
@@ -192,4 +198,17 @@ method_exchangeImplementations(originalMethod, swappedMethod);
 
 #### 14. 理解“类对象”的用意
 
+* 没个实例都有一个指向Class对象的指针，用以表明其类型，这些Class对象构成类的继承体系。 [Class isa]
+* 使用类型信息查询方法来探知无法在编译器确定类型的对象。
+* 尽量使用类型信息查询方法来确定对象类型，不要直接比较类对象，因为某些对象可能实现了消息转发功能。
 
+>"isMemberOfCalss:" 判定对象是否为某个对象的实力
+>
+>"isKindOfClass:" 对象是否是这个类或者其派生类的实力。
+
+```
+//判断对象是否是某个类的实例
+if ([objec class] == [EOCSomeClass class]){
+	//'objec' is an instance of EOCSomeClass
+}
+```
