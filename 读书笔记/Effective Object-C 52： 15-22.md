@@ -91,12 +91,121 @@ duplicate symbol _OBJC_CLASS_$_EOCTheClass in:
 * 不要使用缩略后的类型
 * 风格符合自己的代码或者集成的框架。
 
+方法和命名：
+
+1. 驼峰式大小写命名发（camel casing）：小写字母开头、其后没有单词首字母大写。
+2. 类名也用驼峰，不过都要首字母要大写。
+
+
+##### 方法命名例子：
+
+```
++string
++stringWithString
++localizedStringWithFormat:
+-lowercaseString
+-intValue
+-length
+-lengthOfBytesUsingEncoding:
+-getCharacters:range:
+-(void)getCharacters:(unichar*)buffer range:(NSRange)aRange
+-hasPrefix
+-isEqualToString:
+```
+
+##### 类和协议的命名：
+
+1. 加上前缀。 例如： UIView、UIViewController..
+2. 在类名后面加上Delegate 例如：UITableViewDelegate
 
 #### 20. 为私有方法添加前缀
 
+* 私有方法加上前缀区别公有方法
+* 不要单用"_" 来做私有方法的前缀，这种做法是预留给apple 公司的。
+
+私有方法添加前缀： "p_"
+
+```
+-(void)p_privateMethod{}
+```
 
 
 #### 21. 理解Object-C 错误模型
 
+1. 只在及其罕见的情况下才会抛出异常，程序直接退出。
+2. 不那么严重的错误： 方法放回 nil／0， 或是使用NSError 表明有错误发生。
+
+NSError 三条信息：
+
+1. Error domain (错误范围， type ： NSString)
+2. Error code (错误码， type： int)
+3. user info （用户信息， type： dictionary）
+
+NSError 常见用法
+
+1.由（delegate） 来传递
+
+```
+-(void)connection:(NSURLConnection*) connection didFailWithError:(NSError*) error
+```
+
+2.由方法的“输出参数” 放回给调用者，不仅能通过返回值判断是否成功，还通过NSError来判定
+
+```
+-(BOOL)doSomething:(NSError**)error
+NSError *error = nil;
+BOOL ret = [object doSomething:&error];
+if(error){
+	//There was an error
+}
+
+BOOL ret = [object doSomething:nil];
+if (ret){
+	//there was an error
+}
+
+```
+3.例子
+
+```
+-(BOOL)doSomething:(NSError **)error{
+	//Do Something that my cause an error
+	if(/* there was an error */){
+		if (error){
+		//Pass the 'error' through the out-parameter
+			*error = [NSError errorWithDmain:domain code:code userinfo:userInfo];
+		}	
+		return NO;
+	}else {
+		return YES;
+	}
+	
+}
+```
+
 #### 22. 理解NSCoping 协议
 
+* 若自定义对象具有拷贝功能，需实现NSCopying 协议
+* 根据对象类型 ： 可变、不可变 -> NSCopying 与 NSMuatbleCoping
+* 浅拷贝、深拷贝（若需要，则考虑新增一个专门执行深拷贝的方法）， 一般情况应该尽量使用浅拷贝。
+
+两个拷贝协议 NSCopying、NSMutableCopying：
+
+```
+
+- (id)copyWithZone:(nullable NSZone *)zone;
+
+- (id)mutableCopyWithZone:(nullable NSZone *)zone;
+
+```
+例子：
+
+```
+-(id)copyWithZone:(NSZone *)zone{
+     Person* copy = [[[self class] allocWithZone:zone] initWithFirstName:_firstName];
+     copy->_friends = [_friends mutableCopy];
+    return
+}
+```
+
+"->" 语法：内部使用实例变量。
