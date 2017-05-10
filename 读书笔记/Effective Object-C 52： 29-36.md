@@ -33,13 +33,13 @@ NSMutableArray *array = [[NSMutableArray alloc] init];
 
 ```
 
-<!--![对象创建释放流程](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/29-2对象创建释放流程.png)-->
+![对象创建释放流程](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/29-2对象创建释放流程.png)
 
 ##### 保留环（retain cycle）
 环状互相引用多个对象，导致内存泄漏。
 
-<!--![保留环](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/29-3保留环.png)
--->
+![保留环](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/29-3保留环.png)
+
 解决方案：1. “弱引用”（weak reference）  2.从外界命令循环中的某个对象不再保留另一个对象。
 
 
