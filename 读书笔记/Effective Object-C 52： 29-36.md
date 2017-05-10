@@ -45,6 +45,9 @@ NSMutableArray *array = [[NSMutableArray alloc] init];
 
 #### 30.以ARC简化引用计数
 
+* 手动“保留”、“释放”->自动化。
+* ARC只负责Objective-C对象的内存。
+
 
 
 
