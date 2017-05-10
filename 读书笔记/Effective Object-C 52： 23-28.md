@@ -113,12 +113,14 @@ if (_delegateFlags.didReceiveData){
 -(void)isFriendWith:(EOCPerson*)person{
 	/* ... */
 }
+
 @end
 ```
 
 #### 25.总是为第三方类的分类名称加上前缀
 
-
+ 
+ 
 
 #### 26.
 #### 27.
