@@ -134,14 +134,50 @@ if (_delegateFlags.didReceiveData){
 -(NSString *)abc_urlEncodeString;
 
 -(NSString *)abc_urlDecodedString;
+
 @end
-
-
 ``` 
 
 #### 26.勿在分类中声明属性
 
+* 把封装数据所用的全部属性定义在主接口中。
+* “Class-continuation 分类” 之外的其他分类中，可以定义存取方法，但尽量不要定义属性。
+
+1. 分类定义属性编译器无法自动合成该属性的存取方法，需要手动实现。
+2. 多次实现存取，容易造成代码冗余，内存管理上也会出现问题。
+
+#### 27.使用“calss-continuation 分类” 隐藏实现细节
+* 通过“class-continuation 分类” 向类中新增实力变量
+* .h 设置成只读的属性，若需要可以在“class-continuation 分类”重新设置成“可读写”
+* 私有方法的原型声明在“class-continuation 分类”里面。
+* 隐密的协议可以写在“class-continuation 分类”中。
+
+什么是“class-continuation 分类”：
+比如类EOCPerson  写在 .m 内
+
+```
+@interface EPCPerson()
+//Methods here
+@end
+
+```
+
+#### 28.通过协议提供匿名对象
+
+* 协议可在某种程度上提供匿名类型。具体的对象类型可以淡化成尊从某协议的id类型，协议里规定了对象所应该实现的方法。
+* 使用匿名对象来隐藏类型名称（或类名）
+* 如果具体类型不重要，重要的是对象能够响应（定义在协议里的）特定方法，那么可以用匿名对象来表示。
+
+匿名对象（anonymous object）：其他语言：内联形式创建出来的无名类 ；object-c：只要遵从协议的任何对象。
+比如 ： `@property(nonatomic, weak) id<EOCDelegate> delegate` delegate 就是个匿名对象。 
+`id <protocol>`
+
+<!--处理数据库连接（database connection）-->
 
 
-#### 27.
-#### 28.
+
+
+
+
+
+
