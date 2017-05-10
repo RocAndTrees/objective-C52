@@ -12,12 +12,17 @@ Object-C 语言特性： “协议” （protocol）、“分类”（Category�
 委托模式：定义一套接口，对象若想接受另一个对象的委托，则需要遵从此接口。 委托对象（delegate）
 数据源模式：数据源（Data Source）流向类（Class） 
 图2
+![网络请求整体流程图](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/13-2操作后的映射表.png)
 
 例子网络请求整体流程图：
-图1 
+
+![网络请求整体流程图](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/13-2操作后的映射表.png)
+
 
 本对象和委托对象之间的所有权关系：
-图3
+
+![本对象和委托对象之间的所有权关系图](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/13-2操作后的映射表.png)
+
 
 协议定义：
 
@@ -46,6 +51,7 @@ Object-C 语言特性： “协议” （protocol）、“分类”（Category�
 
 ```
 委托对象调用可选方法(+判断委托对象是否响应相关选择子)：
+
 ```
 if ([_deleage respondsToSelector:@selector(netWorkFetcher:didReceiveData:)]) {
         [_deleage netWorkFetcher:self didReceiveData:data];
@@ -68,7 +74,6 @@ _delegateFlags.didReceiveData = 1;
 if (_delegateFlags.didReceiveData){
 	//Yes , flag set
 }
-
 
 ```
 

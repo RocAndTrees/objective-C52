@@ -149,7 +149,7 @@ sendMsg 操作流程：
 
 消息转发流程：
  
-![MacDown logo](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/12-1消息转发全流程.png)
+![消息转发流程](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/12-1消息转发全流程.png)
 
 
 <!--1.无缝桥接（toll-free bridging）-->
@@ -171,13 +171,13 @@ IMP： 函数方法指针。  `id (* IMP)(id, SEL, ...)`
 
 类的选择子映射表 图1:
 
-![MacDown logo](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/13-1NSString类的选择子映射表.png)
+![类的选择子映射表](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/13-1NSString类的选择子映射表.png)
 
 
 开发者几个开发方向：1. 新增选择子 2. 改变选择子所对应的方法实现 3. 交换两个选择子所映射到的指针。
 
 改变后映射表 图2:
-![MacDown logo](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/13-2操作后的映射表.png)
+![改变后映射表](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/13-2操作后的映射表.png)
 
 
 ```
