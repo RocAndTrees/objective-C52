@@ -77,10 +77,49 @@ if (_delegateFlags.didReceiveData){
 
 ```
 
+#### 24.将类的实现代码分散到便于管理的数个分类之中
+
+* 使用分类机制把类的实现代码划分成易于管理的小块
+* 将“私有”的方法归入名为 Private的分类中，以隐藏实现细节。
+
+例子： 
+
+```
+@interface EOCPerson （Friendship)
+-(void)addFriend:(EOCPerson*)person;
+-(void)removeFriend:(EOCPerson*)person;
+-(void)isFriendWith:(EOCPerson*)person;
+@end
+
+@interface EOCPerson （Work)
+-(void)performDaysWork;
+-(void)takeVacationFromWork;
+@end
+
+@interface EOCPerson （Play)
+-(void)goToTheCinama;
+-(void)goToSportsGame;
+@end
 
 
-#### 24.
-#### 25.
+
+@implementation EOCPerson(Friendship) 
+-(void)addFriend:(EOCPerson*)person{
+	/* ... */
+}
+-(void)removeFriend:(EOCPerson*)person{
+	/* ... */
+}
+-(void)isFriendWith:(EOCPerson*)person{
+	/* ... */
+}
+@end
+```
+
+#### 25.总是为第三方类的分类名称加上前缀
+
+
+
 #### 26.
 #### 27.
 #### 28.
