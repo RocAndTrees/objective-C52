@@ -15,7 +15,7 @@
 * release： 递减
 * autorelease： 自动释放池（autorelease pool）
 
-图1
+![对象生命期中计数量的变化 logo](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/29-1对象生命期中计数量的变化.png)
 
 例子（MRC情况下手动添加释放 retain count）：
 
@@ -33,12 +33,13 @@ NSMutableArray *array = [[NSMutableArray alloc] init];
 
 ```
 
-图2
+<!--![对象创建释放流程](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/29-2对象创建释放流程.png)-->
 
 ##### 保留环（retain cycle）
 环状互相引用多个对象，导致内存泄漏。
-图3
 
+<!--![保留环](https://raw.githubusercontent.com/RocAndTrees/objective-C52/master/resource/image/objec-c52/29-3保留环.png)
+-->
 解决方案：1. “弱引用”（weak reference）  2.从外界命令循环中的某个对象不再保留另一个对象。
 
 
