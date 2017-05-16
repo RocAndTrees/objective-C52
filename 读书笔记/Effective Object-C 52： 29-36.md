@@ -1,5 +1,5 @@
 # Effective Object-C 52：29-36
-### 四、内存管理
+### 五、内存管理
 
 >自动引用计数（Automatic Reference Counting， ARC）
 
@@ -74,11 +74,10 @@ NSMutableArray *array = [[NSMutableArray alloc] init];
 #### 34.以“自动释放池块”降低内存峰值
 * 
 
-
 #### 35.用“僵尸对象”调试内存管理问题
 
 
-
 #### 36.不要使用retainCount
+
 * retainCount 比较鸡肋的功能，无法放映对象生命期的全貌。
 * 引入ARC 后，retainCount方法已经正式废止。

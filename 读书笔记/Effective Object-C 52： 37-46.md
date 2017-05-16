@@ -1,5 +1,5 @@
 # Effective Object-C 52：37-46
-### 四、块与大中枢派发
+### 六、块与大中枢派发
 
 > 块（block） 、大中枢派发（Grand center Dispatch， GCD）
 >
