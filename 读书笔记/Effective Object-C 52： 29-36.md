@@ -72,10 +72,12 @@ NSMutableArray *array = [[NSMutableArray alloc] init];
 * weak 引用可以自动清空，也可以不自动清空。自动清空（autoniling）随ARC引入的新特性，由运行期系统来实现。
 
 #### 34.以“自动释放池块”降低内存峰值
-* 
+
+- 略
 
 #### 35.用“僵尸对象”调试内存管理问题
 
+- 略
 
 #### 36.不要使用retainCount
 

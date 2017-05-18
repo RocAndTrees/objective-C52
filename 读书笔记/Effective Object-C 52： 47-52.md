@@ -41,12 +41,16 @@ NSLog(@"Size of array = %li", CGArrayGetCount(aCFArray));
 
 #### 51.精简initialize 与 load的实现代码
 
+- 加载阶段，如果类使用了load方法，系统就会调用它。分类如果也定义了，类的load方法要比分类的先调用。（load 不参与覆写机制）。
+- 首次使用某个类之前，系统会向其发送initialize 消息。（会覆写）
+- 无法在编译器设置的全局常量，可以放在initialize 方法里初始化。
 
 
 
 #### 52.别忘了NSTimer会保留其目标对象
 
 * NSTimer 对象会保留其目标，直到计时器本身失效为止，调用invalidate 方法可以让计时器失效，另外一次性的计时器在触发任务后也会失效。
-
+- 反复执行任务的计时器，容易引入保留环，造成内存泄漏。
+- 可以扩充NSTimer的功能， 用“块”来打破保留环。（关键： 把强引用self -> WeakSelf）
 
 
